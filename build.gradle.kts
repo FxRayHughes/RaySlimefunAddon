@@ -6,8 +6,23 @@ plugins {
 }
 
 taboolib {
+    description {
+        contributors {
+            name("Ray_Hughes")
+        }
+        dependencies {
+            name("Slimefun")
+        }
+    }
     install("common")
     install("common-5")
+    install("module-configuration")
+    install("module-chat")
+    install("module-lang")
+    install("module-nms")
+    install("module-nms-util")
+    install("module-ui")
+    install("module-database")
     install("platform-bukkit")
     install("module-configuration")
     classifier = null
@@ -33,25 +48,4 @@ tasks.withType<JavaCompile> {
 configure<JavaPluginConvention> {
     sourceCompatibility = JavaVersion.VERSION_1_8
     targetCompatibility = JavaVersion.VERSION_1_8
-}
-
-publishing {
-    repositories {
-        maven {
-            url = uri("https://repo.tabooproject.org/repository/releases")
-            credentials {
-                username = project.findProperty("taboolibUsername").toString()
-                password = project.findProperty("taboolibPassword").toString()
-            }
-            authentication {
-                create<BasicAuthentication>("basic")
-            }
-        }
-    }
-    publications {
-        create<MavenPublication>("library") {
-            from(components["java"])
-            groupId = project.group.toString()
-        }
-    }
 }
